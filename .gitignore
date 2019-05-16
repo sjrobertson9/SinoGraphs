@@ -1,1 +1,9 @@
+# Ordinary development cruft 
+venv
+.DS_Store
 .idea
+.vscode
+__pycache__
+*.pyc
+*.zip
+*.csv
