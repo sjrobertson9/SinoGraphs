@@ -1,7 +1,8 @@
 #  takes in list of functions
 #  for each function, calculates 50 x,y points
-#  stores each point in a matrix
+#  stores each point in a list within a dictionary
 import math
+
 
 def getPoints(functions):
     funcPoints = {}
@@ -10,18 +11,27 @@ def getPoints(functions):
             points = parseFunc(func, "sin")
         elif "cos" in func:
             points = parseFunc(func, "cos")
+        elif "tan" in func:
+            points = parseFunc(func, "tan")
         else:
             raise Exception("No function name found")
         funcPoints[func] = points
     return funcPoints
 
-# EX: sin(x) + 5
+
+# TODO: make this work with fractions :(
+# EX: sin(1/2x) + 5
 def parseFunc(func, type):
     func_split = func.partition(type)
-    # EX: [] [sin] [(x)+5]
+    # EX: [1/2] [sin] [(1/2x)+5]
     # AMPLITUDE
     if func_split[0] is "":
         a = 1
+    elif "/" in func_split[0]:
+        a_split = func_split[0].partition("/")
+        num = a_split[0]
+        denom = a_split[2]
+        a = float(num) / float(denom)
     else:
         if func_split[0].startswith("-"):
             if func_split[0].strip("-") is "":
@@ -32,9 +42,16 @@ def parseFunc(func, type):
             a = int(func_split[0])
     # PERIOD
     b_split = func_split[2].split("x")
-    # EX: [(, )+5]
+    # EX: [(1/2, )+5]
     if b_split[0].strip("(") is "":
         b = 1
+    elif "/" in b_split[0]:  # FRACTION ALERT
+        b_strip = b_split[0].strip("(")
+        b_strip_split = b_strip.partition("/")
+        num = b_strip_split[0]
+        denom = b_strip_split[2]
+        b = float(num) / float(denom)
+        print(b)
     else:
         b = b_split[0].strip("(")
         if b.startswith("-"):
@@ -63,18 +80,18 @@ def parseFunc(func, type):
     else:
         d = 0
     points = []
-    # TODO: calculate 50 values given the a b c and d values
-    for x in range(0, 50, 5):
+    for x in range(-50, 50, 5):
         points.append(a * math.sin(b * x + c) + d)
     return points
 
-# def main():
-#     funcs = ["sin(x)", "-sin(x)", "-4sin(x)", "4sin(x)", "8sin(x)",
-#              "-8sin(x)", "cos(x)", "-cos(x)", "50sin(x)", "-50sin(x)"]
-#     pointz = getPoints(funcs)
-#     for func, points in pointz.items():
-#         print(func, ":", points)
-#
-# main()
+
+def main():
+    funcs = ["tan(1/3x)", "tan(-1/3x)", "tan(1/4x)", "tan(-1/4x)",
+                "3tan(1/3x)", "-3tan(1/3x)", "3tan(1/4x)", "-3tan(1/4x)",
+                "3tan(1/4x)", "-3tan(1/4x)", "2sin(1/2x)", "-2sin(1/2x)"]
+    pointz = getPoints(funcs)
+    for func, points in pointz.items():
+        print(func, ":", points)
 
 
+main()
