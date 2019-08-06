@@ -22,6 +22,7 @@ def getPoints(functions):
 # TODO: make this work with fractions :(
 # EX: sin(1/2x) + 5
 def parseFunc(func, type):
+    # print("func:", func)
     func_split = func.partition(type)
     # EX: [1/2] [sin] [(1/2x)+5]
     # AMPLITUDE
@@ -37,6 +38,7 @@ def parseFunc(func, type):
             if func_split[0].strip("-") is "":
                 a = -1
             else:
+                # print("func_split:",func_split)
                 a = int(func_split[0].strip("-")) * -1
         else:
             a = int(func_split[0])
@@ -51,7 +53,7 @@ def parseFunc(func, type):
         num = b_strip_split[0]
         denom = b_strip_split[2]
         b = float(num) / float(denom)
-        print(b)
+        # print(b)
     else:
         b = b_split[0].strip("(")
         if b.startswith("-"):
@@ -80,18 +82,23 @@ def parseFunc(func, type):
     else:
         d = 0
     points = []
-    for x in range(-50, 50, 5):
-        points.append(a * math.sin(b * x + c) + d)
+    for x in range(-50, 50, 1):
+        if type is "sin":
+            points.append(a * math.sin(b * x + c) + d)
+        elif type is "cos":
+            points.append(a * math.cos(b * x + c) + d)
+        else:
+            points.append(a * math.tan(b * x + c) + d)
     return points
 
 
-def main():
-    funcs = ["tan(1/3x)", "tan(-1/3x)", "tan(1/4x)", "tan(-1/4x)",
-                "3tan(1/3x)", "-3tan(1/3x)", "3tan(1/4x)", "-3tan(1/4x)",
-                "3tan(1/4x)", "-3tan(1/4x)", "2sin(1/2x)", "-2sin(1/2x)"]
-    pointz = getPoints(funcs)
-    for func, points in pointz.items():
-        print(func, ":", points)
-
-
-main()
+# def main():
+#     funcs = ["tan(1/3x)", "tan(-1/3x)", "tan(1/4x)", "tan(-1/4x)",
+#                 "3tan(1/3x)", "-3tan(1/3x)", "3tan(1/4x)", "-3tan(1/4x)",
+#                 "3tan(1/4x)", "-3tan(1/4x)", "2sin(1/2x)", "-2sin(1/2x)"]
+#     pointz = getPoints(funcs)
+#     for func, points in pointz.items():
+#         print(func, ":", points)
+#
+#
+# main()

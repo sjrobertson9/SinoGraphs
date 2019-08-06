@@ -1,17 +1,19 @@
 from Function import getPoints
 import turtle
 
+# TODO: add multipliers to each list ([0, 1])
 
-# TODO: well, make it so that this shit draws shit
-def paint(patterns, pattern="test"):
-    print("paint reached")
+def paint(patterns, pattern="city"):
     functions = getPoints(patterns[pattern])
-    print(functions)
+    # print(functions)
     turtle.showturtle()
+    turtle.speed(10)
     for func in functions:
-        turtle.penup()
-        for x in range(20):
+        turtle.pu()
+        x = -125
+        for i in range(50):
+            turtle.goto(x*3, functions[str(func)][i]*2)
+            x += 5
             turtle.pd()
-            turtle.goto(x*30, functions[str(func)][x]*30)
-            turtle.pu()
+        turtle.pu()
     turtle.done()
