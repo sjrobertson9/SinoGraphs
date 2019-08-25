@@ -2,6 +2,7 @@ from Function import getPoints
 from Patterns import mults
 import turtle
 
+
 def paint(patterns, pattern="city"):
     functions = getPoints(patterns[pattern])
     xmult = 3.1
