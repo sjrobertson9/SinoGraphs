@@ -63,3 +63,12 @@ mults = {
 }
 
 # Colors?????
+
+colors = {
+    "red": ["maroon", "darkorange", "mistyrose", "chocolate", "tomato",
+            "coral", "darksalmon", "sienna"],
+    "blue": ["skyblue", "slategrey", "teal", "paleturquoise", "royalblue",
+             "lavender", "lightsteelblue", "cornflowerblue"]
+}
+
+

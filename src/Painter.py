@@ -1,6 +1,7 @@
 from Function import getPoints
 from Patterns import mults
 import turtle
+import random
 
 
 def paint(patterns, pattern="city"):
@@ -11,6 +12,7 @@ def paint(patterns, pattern="city"):
     turtle.showturtle()
     turtle.speed(0)
     for func in functions:
+        turtle.color(getColor())
         turtle.pu()
         x = -125
         for i in range(50):
@@ -19,3 +21,11 @@ def paint(patterns, pattern="city"):
             turtle.pd()
         turtle.pu()
     turtle.done()
+
+
+def getColor():
+    red = ["maroon", "darkorange", "mistyrose", "chocolate", "tomato",
+           "coral", "darksalmon", "sienna"]
+    blue = ["skyblue", "slategrey", "teal", "paleturquoise", "royalblue",
+             "lavender", "lightsteelblue", "cornflowerblue"]
+    return red[random.randint(0, 7)]
