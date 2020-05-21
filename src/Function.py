@@ -14,19 +14,19 @@ def getPoints(functions):
         elif "tan" in func:
             points = parseFunc(func, "tan")
         else:
-            raise Exception("No function name found")
+            raise Exception("No function identifier found in function: " + func)
         funcPoints[func] = points
     return funcPoints
 
 
 # TODO: make this work with fractions :(
-# EX: sin(1/2x) + 5
+# EX: sin(1/2x + 2) + 5
 def parseFunc(func, type):
     # print("func:", func)
     func_split = func.partition(type)
-    # EX: [1/2] [sin] [(1/2x)+5]
+    # EX: [1/2] [sin] [(1/2x + 2)+5]
     # AMPLITUDE
-    if func_split[0] is "":
+    if func_split[0] == "":
         a = 1
     elif "/" in func_split[0]:
         a_split = func_split[0].partition("/")
@@ -41,11 +41,15 @@ def parseFunc(func, type):
                 # print("func_split:",func_split)
                 a = int(func_split[0].strip("-")) * -1
         else:
-            a = int(func_split[0])
+            try:
+                a = int(func_split[0])
+            except ValueError:
+                print("Function " + func + " -- INVALID A VALUE")
+                exit()
     # PERIOD
     b_split = func_split[2].split("x")
-    # EX: [(1/2, )+5]
-    if b_split[0].strip("(") is "":
+    # EX: [(1/2 + 2, )+5]
+    if b_split[0].strip("(") == "":
         b = 1
     elif "/" in b_split[0]:  # FRACTION ALERT
         b_strip = b_split[0].strip("(")
@@ -62,25 +66,49 @@ def parseFunc(func, type):
             else:
                 b = int(b.strip("-")) * -1
         else:
-            b = int(b)
+            try:
+                b = int(b)
+            except ValueError:
+                print("Function " + func + " -- INVALID B VALUE")
+                exit()
     # HORIZONTAL SHIFT
     c_split = b_split[1].partition(")")
-    # EX: [] [)] [+5]
-    if c_split[0] is "":
+    # EX: [+2] [)] [+5]
+    if c_split[0] == "":
         c = 0
+    elif "/" in c_split[0]:
+        c_strip = c_split[0].strip("(")
+        c_strip_split = c_strip.partition("/")
+        num = c_strip_split[0]
+        denom = c_strip_split[2]
+        c = float(num) / float(denom)
     else:
         c = c_split[0].strip(")")
         if c_split[0].startswith("-"):
             c = int(c.strip("-")) * -1
         else:
-            c = int(c_split[0])
+            try:
+                c = int(c_split[0])
+            except ValueError:
+                print("Function " + func + " -- INVALID C VALUE")
+                exit()
     # VERTICAL SHIFT
-    if c_split[2].startswith("-"):
-        d = int(c_split[2].strip("-")) * -1
-    elif c_split[2].startswith("+"):
-        d = int(c_split[2].strip("+"))
-    else:
+    if c_split[2] == "":
         d = 0
+    #elif "/" in c_split[2]:
+    #    d_strip =
+    elif c_split[2].startswith("-"):
+        try:
+            d = int(c_split[2].strip("-")) * -1
+        except ValueError:
+            print("Function " + func + " -- INVALID D VALUE")
+            exit()
+    elif c_split[2].startswith("+"):
+        try:
+            d = int(c_split[2].strip("+"))
+        except ValueError:
+            print("Function " + func + " -- INVALID D VALUE")
+            exit()
     points = []
     for x in range(-50, 50, 1):
         if type is "sin":
