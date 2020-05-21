@@ -12,8 +12,7 @@ def paint(patterns, pattern="test", color="blue"):
     turtle.showturtle()
     turtle.speed(0)
     for func in functions:
-        # turtle.color(getColor(color))
-        turtle.color("black")
+        turtle.color(getColor(color))
         turtle.pu()
         x = -125
         for i in range(50):
@@ -25,6 +24,8 @@ def paint(patterns, pattern="test", color="blue"):
 
 
 def getColor(color):
+    #TODO: make more palettes
+    #TODO: figure out how to make a gradient -- global variable?? reset in main??
     red = ["maroon", "darkorange", "mistyrose", "chocolate", "tomato",
            "coral", "darksalmon", "sienna"]
     blue = ["skyblue", "slategrey", "teal", "paleturquoise", "royalblue",
