@@ -1,2 +1,0 @@
-type: sin
-functions: 4sin(x), -4sin(x), 4sin(4x), -4sin(4x)
