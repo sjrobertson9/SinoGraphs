@@ -1,12 +1,12 @@
 # Contains a whole lot of lists I guess
 patterns = {
-    "test": ["sin(x-8/2)", "sin(x)", "sin(x+8/2)-5", "sin(x)-5"],
+    "test": ["sin(x-8/2)+1/2", "sin(x)", "sin(x+8/2)-5", "sin(x)-5"],
     "eyes": ["3tan(x)", "-3tan(x)", "8cos(1/3x)", "-8cos(1/3x)",
              "4cos(1/3x)", "-4cos(1/3x)", "sin(1/3x)", "-sin(1/3x)"],
     "fingers": ["tan(1/3x)", "tan(-1/3x)", "tan(1/4x)", "tan(-1/4x)",
                 "3tan(1/3x)", "-3tan(1/3x)", "3tan(1/4x)", "-3tan(1/4x)",
                 "3tan(1/4x)", "-3tan(1/4x)", "2sin(1/2x)", "-2sin(1/2x)"],
-    "city": ["15sin(1/2x+5)", "-15sin(1/2x+5)", "12sin(1/2x)+ 3", "-12sin(1/2x) + 3",
+    "city": ["15sin(1/2x+5)", "-15sin(1/2x+5)", "12sin(1/2x)+3", "-12sin(1/2x)+3",
              "4cos(x)", "-4cos(x)",
              "5cos(x)", "-5cos(x)", "6cos(x)", "-6cos(x)",
              "7cos(x)", "-7cos(x)", "8cos(x)", "-8cos(x)",

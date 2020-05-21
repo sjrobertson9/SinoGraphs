@@ -19,10 +19,8 @@ def getPoints(functions):
     return funcPoints
 
 
-# TODO: make this work with fractions :(
 # EX: sin(1/2x + 2) + 5
 def parseFunc(func, type):
-    # print("func:", func)
     func_split = func.partition(type)
     # EX: [1/2] [sin] [(1/2x + 2)+5]
     # AMPLITUDE
@@ -35,10 +33,9 @@ def parseFunc(func, type):
         a = float(num) / float(denom)
     else:
         if func_split[0].startswith("-"):
-            if func_split[0].strip("-") is "":
+            if func_split[0].strip("-") == "":
                 a = -1
             else:
-                # print("func_split:",func_split)
                 a = int(func_split[0].strip("-")) * -1
         else:
             try:
@@ -61,7 +58,7 @@ def parseFunc(func, type):
     else:
         b = b_split[0].strip("(")
         if b.startswith("-"):
-            if b.strip("-") is '':
+            if b.strip("-") == '':
                 b = -1
             else:
                 b = int(b.strip("-")) * -1
@@ -93,10 +90,13 @@ def parseFunc(func, type):
                 print("Function " + func + " -- INVALID C VALUE")
                 exit()
     # VERTICAL SHIFT
-    if c_split[2] == "":
+    if c_split[2] == '':
         d = 0
-    #elif "/" in c_split[2]:
-    #    d_strip =
+    elif "/" in c_split[2]:
+        d_split = c_split[2].partition("/")
+        num = d_split[0]
+        denom = d_split[2]
+        d = float(num) / float(denom)
     elif c_split[2].startswith("-"):
         try:
             d = int(c_split[2].strip("-")) * -1
@@ -111,9 +111,9 @@ def parseFunc(func, type):
             exit()
     points = []
     for x in range(-50, 50, 1):
-        if type is "sin":
+        if type == "sin":
             points.append(a * math.sin(b * x + c) + d)
-        elif type is "cos":
+        elif type == "cos":
             points.append(a * math.cos(b * x + c) + d)
         else:
             points.append(a * math.tan(b * x + c) + d)

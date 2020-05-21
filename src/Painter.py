@@ -4,7 +4,7 @@ import turtle
 import random
 
 
-def paint(patterns, pattern="city", color="blue"):
+def paint(patterns, pattern="test", color="blue"):
     functions = getPoints(patterns[pattern])
     xmult = 3.1
     ymult = mults[pattern]
